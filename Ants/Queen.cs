@@ -7,17 +7,15 @@ namespace LifeOfAnts.Ants
         private int _countdownTimer { get; set; }
         private bool _firtsMatingMood = true;
         private Random _random = new Random();
-        public override int positionX { get; set; }
-        public override int positionY { get; set; }
-        
+
         public Queen(int positionX, int positionY) : base(positionX, positionY)
         {
         }
 
         public override void Move()
         {
-            positionX += 0;
-            positionY += 0;
+            PositionX += 0;
+            PositionY += 0;
             if (_countdownTimer > 0)
             {
                 _countdownTimer -= 1;

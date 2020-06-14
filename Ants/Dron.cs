@@ -8,20 +8,17 @@ namespace LifeOfAnts.Ants
         public Dron(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-
-        public override int positionX { get; set; }
-        public override int positionY { get; set; }
         private string _headTo;
         private int _waitingTimer = 0;
 
         private void _checkWhereToGo(Queen queen)
         {
-            int queenX = queen.positionX;
-            int queenY = queen.positionY;
+            int queenX = queen.PositionX;
+            int queenY = queen.PositionY;
             
             
 
-            if (Math.Abs(queenX - positionX) < Math.Abs(queenY - positionY))
+            if (Math.Abs(queenX - PositionX) < Math.Abs(queenY - PositionY))
             {
                 if (queenX > 0)
                 {
@@ -49,7 +46,7 @@ namespace LifeOfAnts.Ants
         {
             Random random = new Random();
 
-            int xKickoff = random.Next(positionX-100, positionX+101);
+            int xKickoff = random.Next(PositionX-100, PositionX+101);
             int yKickoff;
             int stepsLeft = Math.Abs(100 - xKickoff);
             if (random.Next(2) == 0)
@@ -61,8 +58,8 @@ namespace LifeOfAnts.Ants
                 yKickoff = stepsLeft - (2 * stepsLeft);
             }
 
-            positionX = xKickoff;
-            positionY = yKickoff;
+            PositionX = xKickoff;
+            PositionY = yKickoff;
         }
         public override void Move()
         {
@@ -70,22 +67,22 @@ namespace LifeOfAnts.Ants
             {
                if (_headTo == "north")
                {
-                   positionY += 1;
+                   PositionY += 1;
                    _headTo = "east";
                }
                if (_headTo == "east")
                {
-                   positionX += 1;
+                   PositionX += 1;
                    _headTo = "south";
                }
                if (_headTo == "south")
                {
-                   positionY -= 1;
+                   PositionY -= 1;
                    _headTo = "west";
                }
                if (_headTo == "west")
                {
-                   positionX -= 1;
+                   PositionX -= 1;
                    _headTo = "north";
                } 
             }
@@ -104,10 +101,10 @@ namespace LifeOfAnts.Ants
         
         public override int GetDistanceToQueen(Queen queen)
         {
-            int queenX = queen.positionX;
-            int queenY = queen.positionX;
-            int xDistance = Math.Abs(positionX - queenX);
-            int yDistance = Math.Abs(positionY = queenY);
+            int queenX = queen.PositionX;
+            int queenY = queen.PositionX;
+            int xDistance = Math.Abs(PositionX - queenX);
+            int yDistance = Math.Abs(PositionY = queenY);
             int stepsToTheQueen = xDistance + yDistance;
             
             if (stepsToTheQueen <= 3)
@@ -123,7 +120,6 @@ namespace LifeOfAnts.Ants
                     _kickoff();
                 }
             }
-
             return stepsToTheQueen;
         }
     }

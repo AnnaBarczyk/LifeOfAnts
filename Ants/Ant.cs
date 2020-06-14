@@ -4,23 +4,23 @@ namespace LifeOfAnts.Ants
 {
     public abstract class Ant
     {
-        public abstract int positionX { get; set; }
-        public abstract int positionY { get; set; }
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
 
         public Ant(int positionX, int positionY)
         {
-            positionX = positionX;
-            positionY = positionY;
+            PositionX = positionX;
+            PositionY = positionY;
         }
 
         public abstract void Move();
 
         public virtual int GetDistanceToQueen(Queen queen)
         {
-            int queenX = queen.positionX;
-            int queenY = queen.positionX;
-            int xDistance = Math.Abs(positionX - queenX);
-            int yDistance = Math.Abs(positionY = queenY);
+            int queenX = queen.PositionX;
+            int queenY = queen.PositionX;
+            int xDistance = Math.Abs(PositionX - queenX);
+            int yDistance = Math.Abs(PositionY = queenY);
             int stepsToTheQueen = xDistance + yDistance;
 
             return stepsToTheQueen;

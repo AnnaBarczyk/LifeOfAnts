@@ -5,9 +5,6 @@ namespace LifeOfAnts.Ants
     public class Worker: Ant
     {
         private Random _random = new Random();
-        public override int positionX { get; set; }
-        public override int positionY { get; set; }
-
         public Worker(int positionX, int positionY) : base(positionX, positionY)
         {
         }
@@ -23,11 +20,11 @@ namespace LifeOfAnts.Ants
 
                 if (_random.Next(2) == 0)
                 {
-                    positionX += east;
+                    PositionX += east;
                 }
                 else
                 {
-                    positionX += west;
+                    PositionX += west;
                 }
             }
             else
@@ -37,11 +34,11 @@ namespace LifeOfAnts.Ants
 
                 if (_random.Next(2) == 0)
                 {
-                    positionX += north;
+                    PositionX += north;
                 }
                 else
                 {
-                    positionX += south;
+                    PositionX += south;
                 }
             }
         }
