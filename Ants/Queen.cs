@@ -5,8 +5,7 @@ namespace LifeOfAnts.Ants
     public class Queen: Ant
     {
         private int _countdownTimer;
-        private bool _firtsMatingMood = true;
-        private Random _random = new Random();
+        private bool _firstMatingMood = true;
 
         public Queen(int positionX, int positionY) : base(positionX, positionY)
         {
@@ -14,7 +13,6 @@ namespace LifeOfAnts.Ants
 
         public override void Move()
         {
-            // Console.WriteLine("Queen" + PositionX + " " + PositionY);
             PositionX += 0;
             PositionY += 0;
             if (_countdownTimer > 0)
@@ -27,11 +25,11 @@ namespace LifeOfAnts.Ants
         {
             bool matingMood;
 
-            if (_firtsMatingMood == true)
+            if (_firstMatingMood == true)
             {
-                _firtsMatingMood = false;
+                _firstMatingMood = false;
 
-                if (_random.Next(2) == 0)
+                if (Utils.GiveMeRandomNumber(0,1) == 0)
                 {
                     matingMood = false;
                 }

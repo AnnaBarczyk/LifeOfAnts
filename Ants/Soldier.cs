@@ -31,7 +31,6 @@ namespace LifeOfAnts.Ants
                 PositionX -= 1;
                 _headTo = "north";
             }
-            // Console.WriteLine("Soldier" + PositionX + " " + PositionY);
         }
         public override void Update(Queen queen)
         {

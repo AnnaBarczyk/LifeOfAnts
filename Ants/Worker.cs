@@ -4,8 +4,6 @@ namespace LifeOfAnts.Ants
 {
     public class Worker: Ant
     {
-        // TODO: jeden statyczny random w utilsach
-        private Random _random = new Random();
         public Worker(int positionX, int positionY) : base(positionX, positionY)
         {
         }
@@ -14,12 +12,12 @@ namespace LifeOfAnts.Ants
         {
             int axisX = 0;
             
-            if (_random.Next(2) == axisX)
+            if (Utils.GiveMeRandomNumber(0,1) == axisX)
             {
                 int east = 1;
                 int west = -1;
 
-                if (_random.Next(2) == 0)
+                if (Utils.GiveMeRandomNumber(0,1) == 0)
                 {
                     PositionX += east;
                 }
@@ -33,7 +31,7 @@ namespace LifeOfAnts.Ants
                 int north = 1;
                 int south = -1;
 
-                if (_random.Next(2) == 0)
+                if (Utils.GiveMeRandomNumber(0,1) == 0)
                 {
                     PositionX += north;
                 }

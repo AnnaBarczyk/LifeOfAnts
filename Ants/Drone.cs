@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace LifeOfAnts.Ants
 {
@@ -50,12 +49,10 @@ namespace LifeOfAnts.Ants
         private void _kickoff()
         {
             Console.WriteLine("Drone kicked off");
-            Random random = new Random();
-
-            int xKickoff = random.Next(PositionX - 100, PositionX + 101);
+            int xKickoff = Utils.GiveMeRandomNumber(PositionX - 100, PositionX + 100);
             int yKickoff;
             int stepsLeft = Math.Abs(100 - xKickoff);
-            if (random.Next(2) == 0)
+            if (Utils.GiveMeRandomNumber(0,1) == 0)
             {
                 yKickoff = stepsLeft;
             }
@@ -110,7 +107,6 @@ namespace LifeOfAnts.Ants
 
         public override int GetDistanceToQueen(Queen queen)
         {
-            // TODO: Single resposibility
             int queenX = queen.PositionX;
             int queenY = queen.PositionX;
             int xDistance = Math.Abs(PositionX - queenX);
