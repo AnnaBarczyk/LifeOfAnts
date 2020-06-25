@@ -1,14 +1,13 @@
-﻿using System;
-using static LifeOfAnts.Utils;
+﻿using static LifeOfAnts.Utils;
 
 namespace LifeOfAnts.Ants
 {
-    public class Worker: Ant
+    public class Worker : Ant
     {
         public Worker(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-        
+
         public override void Move()
         {
             const int axisX = 0;
@@ -17,9 +16,9 @@ namespace LifeOfAnts.Ants
 
             const int east = 1;
             const int west = -1;
-            if (GiveMeRandomNumber(0,1) == axisX)
+            if (GiveMeRandomNumber(0, 1) == axisX)
             {
-                if (GiveMeRandomNumber(0,1) == 0)
+                if (GiveMeRandomNumber(0, 1) == 0)
                 {
                     PositionX += east;
                 }
@@ -30,7 +29,7 @@ namespace LifeOfAnts.Ants
             }
             else
             {
-                if (GiveMeRandomNumber(0,1) == 0)
+                if (GiveMeRandomNumber(0, 1) == 0)
                 {
                     PositionX += north;
                 }
@@ -39,8 +38,8 @@ namespace LifeOfAnts.Ants
                     PositionX += south;
                 }
             }
-            // Console.WriteLine("Worker" + PositionX + " " + PositionY);
         }
+
         public override void Update(Queen queen)
         {
             Move();

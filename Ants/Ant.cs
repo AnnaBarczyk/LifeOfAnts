@@ -4,14 +4,14 @@ namespace LifeOfAnts.Ants
 {
     public abstract class Ant
     {
-        public int PositionX { get; protected set; }
-        public int PositionY { get; protected set; }
-
         protected Ant(int positionX, int positionY)
         {
             PositionX = positionX;
             PositionY = positionY;
         }
+
+        public int PositionX { get; protected set; }
+        public int PositionY { get; protected set; }
 
         public abstract void Move();
 

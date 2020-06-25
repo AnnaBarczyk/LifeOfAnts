@@ -4,18 +4,12 @@ namespace LifeOfAnts.Ants
 {
     public class Drone : Ant
     {
+        private Compass _headTo;
+        private int _waitingTimer;
+
         public Drone(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-        private enum Compass
-        {
-            North,
-            East,
-            South,
-            West
-        }
-        private Compass _headTo;
-        private int _waitingTimer = 0;
 
         public override void CheckWhereToGo(Queen queen)
         {
@@ -50,14 +44,10 @@ namespace LifeOfAnts.Ants
             var xKickoff = Utils.GiveMeRandomNumber(PositionX - 100, PositionX + 100);
             int yKickoff;
             var stepsLeft = Math.Abs(100 - xKickoff);
-            if (Utils.GiveMeRandomNumber(0,1) == 0)
-            {
+            if (Utils.GiveMeRandomNumber(0, 1) == 0)
                 yKickoff = stepsLeft;
-            }
             else
-            {
-                yKickoff = stepsLeft - (2 * stepsLeft);
-            }
+                yKickoff = stepsLeft - 2 * stepsLeft;
 
             PositionX = xKickoff;
             PositionY = yKickoff;
@@ -132,6 +122,14 @@ namespace LifeOfAnts.Ants
             CheckWhereToGo(queen);
             Move();
             GetDistanceToQueen(queen);
+        }
+
+        private enum Compass
+        {
+            North,
+            East,
+            South,
+            West
         }
     }
 }

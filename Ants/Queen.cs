@@ -1,9 +1,8 @@
-﻿using System;
-using static LifeOfAnts.Utils;
+﻿using static LifeOfAnts.Utils;
 
 namespace LifeOfAnts.Ants
 {
-    public class Queen: Ant
+    public class Queen : Ant
     {
         private int _countdownTimer;
         private bool _firstMatingMood = true;
@@ -16,10 +15,7 @@ namespace LifeOfAnts.Ants
         {
             PositionX += 0;
             PositionY += 0;
-            if (_countdownTimer > 0)
-            {
-                _countdownTimer -= 1;
-            }
+            if (_countdownTimer > 0) _countdownTimer -= 1;
         }
 
         public bool IsInMatingMood()
@@ -30,7 +26,7 @@ namespace LifeOfAnts.Ants
             {
                 _firstMatingMood = false;
 
-                matingMood = GiveMeRandomNumber(0,1) != 0;
+                matingMood = GiveMeRandomNumber(0, 1) != 0;
             }
             else
             {
@@ -39,9 +35,10 @@ namespace LifeOfAnts.Ants
 
             return matingMood;
         }
+
         public override void Update(Queen queen)
         {
             Move();
         }
     }
-} 
+}

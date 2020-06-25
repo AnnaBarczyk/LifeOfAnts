@@ -1,20 +1,13 @@
-﻿using System;
-
-namespace LifeOfAnts.Ants
+﻿namespace LifeOfAnts.Ants
 {
-    public class Soldier: Ant
+    public class Soldier : Ant
     {
+        private Compass _headTo = Compass.North;
+
         public Soldier(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-        private enum Compass
-        {
-            North,
-            East,
-            South,
-            West
-        }
-        private Compass _headTo = Compass.North;
+
         public override void Move()
         {
             switch (_headTo)
@@ -37,9 +30,18 @@ namespace LifeOfAnts.Ants
                     break;
             }
         }
+
         public override void Update(Queen queen)
         {
             Move();
+        }
+
+        private enum Compass
+        {
+            North,
+            East,
+            South,
+            West
         }
     }
 }
