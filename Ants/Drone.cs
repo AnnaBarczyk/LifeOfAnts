@@ -7,14 +7,20 @@ namespace LifeOfAnts.Ants
         public Drone(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-
-        private string _headTo;
+        private enum Compass
+        {
+            North,
+            East,
+            South,
+            West
+        }
+        private Compass _headTo;
         private int _waitingTimer = 0;
 
         public override void CheckWhereToGo(Queen queen)
         {
-            int queenX = queen.PositionX;
-            int queenY = queen.PositionY;
+            var queenX = queen.PositionX;
+            var queenY = queen.PositionY;
 
             Console.WriteLine("queen " + queenX + " " + queenY);
 
@@ -22,36 +28,28 @@ namespace LifeOfAnts.Ants
             {
                 if (queenX > 0)
                 {
-                    _headTo = "east";
+                    _headTo = Compass.East;
                 }
                 else
                 {
-                    _headTo = "west";
+                    _headTo = Compass.West;
                     ;
                 }
             }
             else
             {
-                if (queenY > 0)
-                {
-                    _headTo = "north";
-                }
-                else
-                {
-                    _headTo = "south";
-                }
+                _headTo = queenY > 0 ? Compass.North : Compass.South;
             }
 
             Console.WriteLine("head to " + _headTo);
-            // Console.WriteLine("timer " + _waitingTimer);
         }
 
         private void _kickoff()
         {
             Console.WriteLine("Drone kicked off");
-            int xKickoff = Utils.GiveMeRandomNumber(PositionX - 100, PositionX + 100);
+            var xKickoff = Utils.GiveMeRandomNumber(PositionX - 100, PositionX + 100);
             int yKickoff;
-            int stepsLeft = Math.Abs(100 - xKickoff);
+            var stepsLeft = Math.Abs(100 - xKickoff);
             if (Utils.GiveMeRandomNumber(0,1) == 0)
             {
                 yKickoff = stepsLeft;
@@ -71,22 +69,22 @@ namespace LifeOfAnts.Ants
             {
                 Console.WriteLine("Drone before" + PositionX + " " + PositionY);
                 Console.WriteLine("Starting to move " + _headTo);
-                if (_headTo == "north")
+                if (_headTo == Compass.North)
                 {
                     PositionY += 1;
                     Console.WriteLine(PositionY + " north movement");
                 }
-                else if (_headTo == "east")
+                else if (_headTo == Compass.East)
                 {
                     PositionX += 1;
                     Console.WriteLine(PositionX + " east movement");
                 }
-                else if (_headTo == "south")
+                else if (_headTo == Compass.South)
                 {
                     PositionY -= 1;
                     Console.WriteLine(PositionY + "south movement");
                 }
-                else if (_headTo == "west")
+                else if (_headTo == Compass.West)
                 {
                     PositionX -= 1;
                     Console.WriteLine(PositionX + "west movement");
@@ -107,24 +105,22 @@ namespace LifeOfAnts.Ants
 
         public override int GetDistanceToQueen(Queen queen)
         {
-            int queenX = queen.PositionX;
-            int queenY = queen.PositionX;
-            int xDistance = Math.Abs(PositionX - queenX);
-            int yDistance = Math.Abs(PositionY = queenY);
-            int stepsToTheQueen = xDistance + yDistance;
+            var queenX = queen.PositionX;
+            var queenY = queen.PositionX;
+            var xDistance = Math.Abs(PositionX - queenX);
+            var yDistance = Math.Abs(PositionY = queenY);
+            var stepsToTheQueen = xDistance + yDistance;
 
-            if (stepsToTheQueen <= 3)
+            if (stepsToTheQueen > 3) return stepsToTheQueen;
+            if (queen.IsInMatingMood())
             {
-                if (queen.IsInMatingMood())
-                {
-                    Console.WriteLine("Hallelujah!");
-                    _waitingTimer = 10;
-                }
-                else
-                {
-                    Console.WriteLine("D'oh!");
-                    _kickoff();
-                }
+                Console.WriteLine("Hallelujah!");
+                _waitingTimer = 10;
+            }
+            else
+            {
+                Console.WriteLine("D'oh!");
+                _kickoff();
             }
 
             return stepsToTheQueen;

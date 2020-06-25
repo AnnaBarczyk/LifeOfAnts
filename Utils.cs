@@ -6,7 +6,7 @@ namespace LifeOfAnts
     {
         public static int GiveMeRandomNumber(int min, int max)
         {
-            Random random = new Random();
+            var random = new Random();
             return random.Next(min, max + 1);
         }
     }

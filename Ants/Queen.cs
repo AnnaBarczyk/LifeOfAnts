@@ -1,4 +1,5 @@
 ﻿using System;
+using static LifeOfAnts.Utils;
 
 namespace LifeOfAnts.Ants
 {
@@ -25,29 +26,15 @@ namespace LifeOfAnts.Ants
         {
             bool matingMood;
 
-            if (_firstMatingMood == true)
+            if (_firstMatingMood)
             {
                 _firstMatingMood = false;
 
-                if (Utils.GiveMeRandomNumber(0,1) == 0)
-                {
-                    matingMood = false;
-                }
-                else
-                {
-                    matingMood = true;
-                }
+                matingMood = GiveMeRandomNumber(0,1) != 0;
             }
             else
             {
-                if (_countdownTimer == 0)
-                {
-                    matingMood = true;
-                }
-                else
-                {
-                    matingMood = false;
-                }
+                matingMood = _countdownTimer == 0;
             }
 
             return matingMood;

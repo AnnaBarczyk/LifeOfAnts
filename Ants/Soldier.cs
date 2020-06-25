@@ -7,29 +7,34 @@ namespace LifeOfAnts.Ants
         public Soldier(int positionX, int positionY) : base(positionX, positionY)
         {
         }
-        private string _headTo = "north";
+        private enum Compass
+        {
+            North,
+            East,
+            South,
+            West
+        }
+        private Compass _headTo = Compass.North;
         public override void Move()
         {
-            // TODO: Rozwiązać na enumach
-            if (_headTo == "north")
+            switch (_headTo)
             {
-                PositionY += 1;
-                _headTo = "east";
-            }
-            else if (_headTo == "east")
-            {
-                PositionX += 1;
-                _headTo = "south";
-            }
-            else if (_headTo == "south")
-            {
-                PositionY -= 1;
-                _headTo = "west";
-            }
-            else if (_headTo == "west")
-            {
-                PositionX -= 1;
-                _headTo = "north";
+                case Compass.North:
+                    PositionY += 1;
+                    _headTo = Compass.East;
+                    break;
+                case Compass.East:
+                    PositionX += 1;
+                    _headTo = Compass.South;
+                    break;
+                case Compass.South:
+                    PositionY -= 1;
+                    _headTo = Compass.West;
+                    break;
+                case Compass.West:
+                    PositionX -= 1;
+                    _headTo = Compass.North;
+                    break;
             }
         }
         public override void Update(Queen queen)

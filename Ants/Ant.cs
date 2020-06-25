@@ -4,10 +4,10 @@ namespace LifeOfAnts.Ants
 {
     public abstract class Ant
     {
-        public int PositionX { get; set; }
-        public int PositionY { get; set; }
+        public int PositionX { get; protected set; }
+        public int PositionY { get; protected set; }
 
-        public Ant(int positionX, int positionY)
+        protected Ant(int positionX, int positionY)
         {
             PositionX = positionX;
             PositionY = positionY;
@@ -17,11 +17,11 @@ namespace LifeOfAnts.Ants
 
         public virtual int GetDistanceToQueen(Queen queen)
         {
-            int queenX = queen.PositionX;
-            int queenY = queen.PositionX;
-            int xDistance = Math.Abs(PositionX - queenX);
-            int yDistance = Math.Abs(PositionY = queenY);
-            int stepsToTheQueen = xDistance + yDistance;
+            var queenX = queen.PositionX;
+            var queenY = queen.PositionX;
+            var xDistance = Math.Abs(PositionX - queenX);
+            var yDistance = Math.Abs(PositionY = queenY);
+            var stepsToTheQueen = xDistance + yDistance;
 
             return stepsToTheQueen;
         }

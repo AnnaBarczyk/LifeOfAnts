@@ -6,56 +6,55 @@ namespace LifeOfAnts
 {
     public class Hive
     {
-        private static int HiveSize;
-        private int maxHight;
-        private int minHeight;
-        private int maxLenght;
-        private int minLenght;
-        private int _howManyDrones;
-        private int HowManyWorkers;
-        private int HowManySoldiers;
+        private readonly int _maxHeight;
+        private readonly int _minHeight;
+        private readonly int _maxLength;
+        private readonly int _minLength;
+        private readonly int _howManyDrones;
+        private readonly int _howManyWorkers;
+        private readonly int _howManySoldiers;
         private Queen _antQueen;
-        public List<Ant> listOfAnts;
+        public readonly List<Ant> ListOfAnts;
 
         public Hive(int howManyDrones, int howManySoldiers, int howManyWorkers)
         {
-            HiveSize = Utils.GiveMeRandomNumber(150,250);
-            maxHight = HiveSize;
-            minHeight = HiveSize - (2 * HiveSize);
-            maxLenght = HiveSize;
-            minLenght = HiveSize - (2 * HiveSize);
-            listOfAnts = new List<Ant> { };
+            var hiveSize = Utils.GiveMeRandomNumber(150,250);
+            _maxHeight = hiveSize;
+            _minHeight = hiveSize - (2 * hiveSize);
+            _maxLength = hiveSize;
+            _minLength = hiveSize - (2 * hiveSize);
+            ListOfAnts = new List<Ant> { };
             _howManyDrones = howManyDrones;
-            HowManySoldiers = howManySoldiers;
-            HowManyWorkers = howManyWorkers;
+            _howManySoldiers = howManySoldiers;
+            _howManyWorkers = howManyWorkers;
         }
         
         public void CreateAnts()
         {
             Console.WriteLine("Creating ants");
-            _antQueen = new Queen(Utils.GiveMeRandomNumber(minLenght, maxLenght), Utils.GiveMeRandomNumber(minHeight, maxHight));
-            listOfAnts.Add(_antQueen);
+            _antQueen = new Queen(Utils.GiveMeRandomNumber(_minLength, _maxLength), Utils.GiveMeRandomNumber(_minHeight, _maxHeight));
+            ListOfAnts.Add(_antQueen);
 
-            for (int i = 0; i < _howManyDrones; i++)
+            for (var i = 0; i < _howManyDrones; i++)
             {
-                listOfAnts.Add(new Drone(Utils.GiveMeRandomNumber(minLenght,maxLenght), Utils.GiveMeRandomNumber(minHeight, maxHight)));
+                ListOfAnts.Add(new Drone(Utils.GiveMeRandomNumber(_minLength,_maxLength), Utils.GiveMeRandomNumber(_minHeight, _maxHeight)));
             }
-            for (int i = 0; i < HowManySoldiers; i++)
+            for (var i = 0; i < _howManySoldiers; i++)
             {
-                listOfAnts.Add(new Soldier(Utils.GiveMeRandomNumber(minLenght,maxLenght), Utils.GiveMeRandomNumber(minHeight, maxHight)));
+                ListOfAnts.Add(new Soldier(Utils.GiveMeRandomNumber(_minLength,_maxLength), Utils.GiveMeRandomNumber(_minHeight, _maxHeight)));
             }
-            for (int i = 0; i < HowManyWorkers; i++)
+            for (var i = 0; i < _howManyWorkers; i++)
             {
-                listOfAnts.Add(new Worker(Utils.GiveMeRandomNumber(minLenght,maxLenght), Utils.GiveMeRandomNumber(minHeight, maxHight)));
+                ListOfAnts.Add(new Worker(Utils.GiveMeRandomNumber(_minLength,_maxLength), Utils.GiveMeRandomNumber(_minHeight, _maxHeight)));
             }
         }
 
         public void LiveNewLife(int howManyTurns)
         {
             Console.WriteLine("Starting a new life in ants hive");
-            for (int i = 0; i < howManyTurns; i++)
+            for (var i = 0; i < howManyTurns; i++)
             {
-                listOfAnts.ForEach(ant => ant.Update(_antQueen));
+                ListOfAnts.ForEach(ant => ant.Update(_antQueen));
             }
         }
     }

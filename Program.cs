@@ -9,14 +9,9 @@ namespace LifeOfAnts
     {
         static void Main(string[] args)
         {
-            Hive hive = new Hive(1,1,1);
+            var hive = new Hive(2,5,10);
             hive.CreateAnts();
             hive.LiveNewLife(100);
-            List<Ant> lista = hive.listOfAnts;
-            foreach (var ant in lista)
-            {
-                Console.WriteLine(ant.GetType());
-            }
         }
     }
 }

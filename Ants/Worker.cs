@@ -1,4 +1,5 @@
 ﻿using System;
+using static LifeOfAnts.Utils;
 
 namespace LifeOfAnts.Ants
 {
@@ -10,14 +11,15 @@ namespace LifeOfAnts.Ants
         
         public override void Move()
         {
-            int axisX = 0;
-            
-            if (Utils.GiveMeRandomNumber(0,1) == axisX)
-            {
-                int east = 1;
-                int west = -1;
+            const int axisX = 0;
+            const int north = 1;
+            const int south = -1;
 
-                if (Utils.GiveMeRandomNumber(0,1) == 0)
+            const int east = 1;
+            const int west = -1;
+            if (GiveMeRandomNumber(0,1) == axisX)
+            {
+                if (GiveMeRandomNumber(0,1) == 0)
                 {
                     PositionX += east;
                 }
@@ -28,10 +30,7 @@ namespace LifeOfAnts.Ants
             }
             else
             {
-                int north = 1;
-                int south = -1;
-
-                if (Utils.GiveMeRandomNumber(0,1) == 0)
+                if (GiveMeRandomNumber(0,1) == 0)
                 {
                     PositionX += north;
                 }
