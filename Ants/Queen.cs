@@ -4,7 +4,7 @@ namespace LifeOfAnts.Ants
 {
     public class Queen: Ant
     {
-        private int _countdownTimer { get; set; }
+        private int _countdownTimer;
         private bool _firtsMatingMood = true;
         private Random _random = new Random();
 
@@ -14,6 +14,7 @@ namespace LifeOfAnts.Ants
 
         public override void Move()
         {
+            // Console.WriteLine("Queen" + PositionX + " " + PositionY);
             PositionX += 0;
             PositionY += 0;
             if (_countdownTimer > 0)
@@ -52,6 +53,10 @@ namespace LifeOfAnts.Ants
             }
 
             return matingMood;
+        }
+        public override void Update(Queen queen)
+        {
+            Move();
         }
     }
 } 

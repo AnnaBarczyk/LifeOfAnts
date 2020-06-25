@@ -3,20 +3,21 @@ using System.Threading;
 
 namespace LifeOfAnts.Ants
 {
-    public class Dron: Ant
+    public class Drone : Ant
     {
-        public Dron(int positionX, int positionY) : base(positionX, positionY)
+        public Drone(int positionX, int positionY) : base(positionX, positionY)
         {
         }
+
         private string _headTo;
         private int _waitingTimer = 0;
 
-        private void _checkWhereToGo(Queen queen)
+        public override void CheckWhereToGo(Queen queen)
         {
             int queenX = queen.PositionX;
             int queenY = queen.PositionY;
-            
-            
+
+            Console.WriteLine("queen " + queenX + " " + queenY);
 
             if (Math.Abs(queenX - PositionX) < Math.Abs(queenY - PositionY))
             {
@@ -26,7 +27,8 @@ namespace LifeOfAnts.Ants
                 }
                 else
                 {
-                    _headTo = "west";;
+                    _headTo = "west";
+                    ;
                 }
             }
             else
@@ -38,15 +40,19 @@ namespace LifeOfAnts.Ants
                 else
                 {
                     _headTo = "south";
-                } 
+                }
             }
+
+            Console.WriteLine("head to " + _headTo);
+            // Console.WriteLine("timer " + _waitingTimer);
         }
 
         private void _kickoff()
         {
+            Console.WriteLine("Drone kicked off");
             Random random = new Random();
 
-            int xKickoff = random.Next(PositionX-100, PositionX+101);
+            int xKickoff = random.Next(PositionX - 100, PositionX + 101);
             int yKickoff;
             int stepsLeft = Math.Abs(100 - xKickoff);
             if (random.Next(2) == 0)
@@ -61,33 +67,35 @@ namespace LifeOfAnts.Ants
             PositionX = xKickoff;
             PositionY = yKickoff;
         }
+
         public override void Move()
         {
             if (_waitingTimer == 0)
             {
-               if (_headTo == "north")
-               {
-                   PositionY += 1;
-                   _headTo = "east";
-               }
-               if (_headTo == "east")
-               {
-                   PositionX += 1;
-                   _headTo = "south";
-               }
-               if (_headTo == "south")
-               {
-                   PositionY -= 1;
-                   _headTo = "west";
-               }
-               if (_headTo == "west")
-               {
-                   PositionX -= 1;
-                   _headTo = "north";
-               } 
+                Console.WriteLine("Drone before" + PositionX + " " + PositionY);
+                Console.WriteLine("Starting to move " + _headTo);
+                if (_headTo == "north")
+                {
+                    PositionY += 1;
+                    Console.WriteLine(PositionY + " north movement");
+                }
+                else if (_headTo == "east")
+                {
+                    PositionX += 1;
+                    Console.WriteLine(PositionX + " east movement");
+                }
+                else if (_headTo == "south")
+                {
+                    PositionY -= 1;
+                    Console.WriteLine(PositionY + "south movement");
+                }
+                else if (_headTo == "west")
+                {
+                    PositionX -= 1;
+                    Console.WriteLine(PositionX + "west movement");
+                }
             }
-
-            if (_waitingTimer == 1)
+            else if (_waitingTimer == 1)
             {
                 _waitingTimer -= 1;
                 _kickoff();
@@ -96,17 +104,19 @@ namespace LifeOfAnts.Ants
             {
                 _waitingTimer -= 1;
             }
-            
+
+            Console.WriteLine("Drone after" + PositionX + " " + PositionY);
         }
-        
+
         public override int GetDistanceToQueen(Queen queen)
         {
+            // TODO: Single resposibility
             int queenX = queen.PositionX;
             int queenY = queen.PositionX;
             int xDistance = Math.Abs(PositionX - queenX);
             int yDistance = Math.Abs(PositionY = queenY);
             int stepsToTheQueen = xDistance + yDistance;
-            
+
             if (stepsToTheQueen <= 3)
             {
                 if (queen.IsInMatingMood())
@@ -120,7 +130,16 @@ namespace LifeOfAnts.Ants
                     _kickoff();
                 }
             }
+
             return stepsToTheQueen;
+        }
+
+        public override void Update(Queen queen)
+        {
+            GetDistanceToQueen(queen);
+            CheckWhereToGo(queen);
+            Move();
+            GetDistanceToQueen(queen);
         }
     }
 }

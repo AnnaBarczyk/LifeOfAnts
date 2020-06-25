@@ -6,8 +6,9 @@ namespace LifeOfAnts
 {
     public class Hive
     {
-        static Random random = new Random();
-        static int HiveSize = random.Next(150,250);
+        private static Random random = new Random();
+        private static int HiveSize = random.Next(150,250);
+        // TODO Size do konstruktora (Nie do konstruktora bo create ants korzysta  z nich?)
         private int maxHight = HiveSize;
         private int minHeight = HiveSize - (2 * HiveSize);
         private int maxLenght = HiveSize;
@@ -15,12 +16,12 @@ namespace LifeOfAnts
         private int HowManyDrons;
         private int HowManyWorkers;
         private int HowManySoldiers;
-        public Queen AntQueen;
-        
-        public List<Ant> listOfAnts = new List<Ant> { };
+        private Queen _antQueen;
+        public List<Ant> listOfAnts;
 
         public Hive(int howManyDrons, int howManySoldiers, int howManyWorkers)
         {
+            listOfAnts = new List<Ant> { };
             HowManyDrons = howManyDrons;
             HowManySoldiers = howManySoldiers;
             HowManyWorkers = howManyWorkers;
@@ -28,18 +29,19 @@ namespace LifeOfAnts
         
         public void CreateAnts()
         {
-            AntQueen = new Queen(random.Next(minLenght, maxLenght), random.Next(minHeight, maxHight));
-            listOfAnts.Add(AntQueen);
-            
-            for (int i = 0; i > HowManyDrons; i++)
+            Console.WriteLine("Creating ants");
+            _antQueen = new Queen(random.Next(minLenght, maxLenght), random.Next(minHeight, maxHight));
+            listOfAnts.Add(_antQueen);
+
+            for (int i = 0; i < HowManyDrons; i++)
             {
-                listOfAnts.Add(new Dron(random.Next(minLenght,maxLenght), random.Next(minHeight, maxHight)));
+                listOfAnts.Add(new Drone(random.Next(minLenght,maxLenght), random.Next(minHeight, maxHight)));
             }
-            for (int i = 0; i > HowManySoldiers; i++)
+            for (int i = 0; i < HowManySoldiers; i++)
             {
                 listOfAnts.Add(new Soldier(random.Next(minLenght,maxLenght), random.Next(minHeight, maxHight)));
             }
-            for (int i = 0; i > HowManyWorkers; i++)
+            for (int i = 0; i < HowManyWorkers; i++)
             {
                 listOfAnts.Add(new Worker(random.Next(minLenght,maxLenght), random.Next(minHeight, maxHight)));
             }
@@ -47,21 +49,10 @@ namespace LifeOfAnts
 
         public void LiveNewLife(int howManyTurns)
         {
+            Console.WriteLine("Starting a new life in ants hive");
             for (int i = 0; i < howManyTurns; i++)
             {
-               foreach (Ant ant in listOfAnts)
-               {
-                   if (ant.GetType().Name != "Dron")
-                   {
-                       ant.Move();
-                   }
-                   else
-                   {
-                       ant.GetDistanceToQueen(AntQueen);
-                       ant.Move();
-                       ant.GetDistanceToQueen(AntQueen);
-                   }
-               } 
+                listOfAnts.ForEach(ant => ant.Update(_antQueen));
             }
         }
     }

@@ -4,6 +4,7 @@ namespace LifeOfAnts.Ants
 {
     public class Worker: Ant
     {
+        // TODO: jeden statyczny random w utilsach
         private Random _random = new Random();
         public Worker(int positionX, int positionY) : base(positionX, positionY)
         {
@@ -41,6 +42,11 @@ namespace LifeOfAnts.Ants
                     PositionX += south;
                 }
             }
+            // Console.WriteLine("Worker" + PositionX + " " + PositionY);
+        }
+        public override void Update(Queen queen)
+        {
+            Move();
         }
     }
 }

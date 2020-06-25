@@ -25,5 +25,13 @@ namespace LifeOfAnts.Ants
 
             return stepsToTheQueen;
         }
+
+        public virtual void CheckWhereToGo(Queen queen)
+        {
+        }
+
+        public virtual void Update(Queen queen)
+        {
+        }
     }
 }
