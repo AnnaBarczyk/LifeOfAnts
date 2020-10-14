@@ -19,5 +19,5 @@ Extra feature: Sometimes a Wasp appears in the colony. In this case all movement
 -data hiding<br/>
 -no code repetition<br/>
 
-#Status
+#Status<br/>
 Completed
